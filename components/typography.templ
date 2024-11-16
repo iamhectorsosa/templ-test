@@ -1,0 +1,177 @@
+package components
+
+type HeadingProps struct {
+	Level string
+	Class string
+}
+
+var headingVariants = CVA(StyleConfig{
+	Base: []string{
+		"font-semibold tracking-tight",
+	},
+	Variants: map[string]map[string]string{
+		"level": {
+			"default": "scroll-m-9 text-5xl print:text-2xl",
+			"h1":      "scroll-m-9 text-4xl print:text-2xl",
+			"h2":      "scroll-m-8 text-xl print:text-lg",
+			"h3":      "scroll-m-7 text-base print:text-sm",
+			"h4":      "scroll-m-6 text-base print:text-sm",
+			"h5":      "scroll-m-5 text-base print:text-sm",
+			"h6":      "scroll-m-4 text-base print:text-sm",
+		},
+	},
+	DefaultVariants: map[string]string{
+		"level": "default",
+	},
+})
+
+func (p *HeadingProps) cn() string {
+	return headingVariants(StyleProps{
+		Variants: map[string]string{
+			"level": p.Level,
+		},
+		Class: p.Class,
+	})
+}
+
+templ Heading(props HeadingProps) {
+	switch props.Level {
+		case "h1":
+			<h1 class={ props.cn() }>
+				{ children... }
+			</h1>
+		case "h2":
+			<h2 class={ props.cn() }>
+				{ children... }
+			</h2>
+		case "h3":
+			<h3 class={ props.cn() }>
+				{ children... }
+			</h3>
+		case "h4":
+			<h4 class={ props.cn() }>
+				{ children... }
+			</h4>
+		case "h5":
+			<h5 class={ props.cn() }>
+				{ children... }
+			</h5>
+		case "h6":
+			<h6 class={ props.cn() }>
+				{ children... }
+			</h6>
+		default:
+			<h1 class={ props.cn() }>
+				{ children... }
+			</h1>
+	}
+}
+
+type ParagraphProps struct {
+	Class string
+}
+
+var paragraphVariants = CVA(StyleConfig{
+	Base: []string{
+		"font-light leading-loose [&>*]:mx-[0.5ch] print:text-sm",
+	},
+})
+
+func (p *ParagraphProps) cn() string {
+	return paragraphVariants(StyleProps{
+		Class: p.Class,
+	})
+}
+
+templ Paragraph(props ParagraphProps) {
+	<p class={ props.cn() }>
+		{ children... }
+	</p>
+}
+
+type AnchorProps struct {
+	Href  string
+	Class string
+}
+
+var anchorVariants = CVA(StyleConfig{
+	Base: []string{
+		"font-semibold underline underline-offset-8 transition-colors hover:opacity-80",
+	},
+})
+
+func (p *AnchorProps) cn() string {
+	return anchorVariants(StyleProps{
+		Class: p.Class,
+	})
+}
+
+templ Anchor(props AnchorProps) {
+	<a target="_blank" rel="noopener noreferrer" href={ templ.URL(props.Href) } class={ props.cn() }>
+		{ children... }
+	</a>
+}
+
+type CodeProps struct {
+	Class string
+}
+
+var codeVariants = CVA(StyleConfig{
+	Base: []string{
+		"whitespace-nowrap rounded bg-muted py-[0.2rem] px-[0.3rem] font-mono font-medium",
+	},
+})
+
+func (p *CodeProps) cn() string {
+	return codeVariants(StyleProps{
+		Class: p.Class,
+	})
+}
+
+templ Code(props CodeProps) {
+	<code class={ props.cn() }>
+		{ children... }
+	</code>
+}
+
+type ListProps struct {
+	ListType string
+	Class    string
+}
+
+var listVariants = CVA(StyleConfig{
+	Base: []string{
+		"list-inside font-light leading-loose marker:text-muted-foreground [&>li>p]:inline",
+	},
+	Variants: map[string]map[string]string{
+		"listType": {
+			"default":   "list-disc",
+			"unordered": "list-disc",
+			"ordered":   "list-decimal",
+		},
+	},
+	DefaultVariants: map[string]string{
+		"listType": "default",
+	},
+})
+
+func (p *ListProps) cn() string {
+	return listVariants(StyleProps{
+		Variants: map[string]string{
+			"listType": p.ListType,
+		},
+		Class: p.Class,
+	})
+}
+
+templ List(props ListProps) {
+	if props.ListType == "ordered" {
+		<ol class={ props.cn() }>
+			{ children... }
+		</ol>
+	} else {
+		<ul class={ props.cn() }>
+			{ children... }
+		</ul>
+	}
+}

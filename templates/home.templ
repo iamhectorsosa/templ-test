@@ -1,0 +1,124 @@
+package templates
+
+import (
+	"fmt"
+	"github.com/iamhectorsosa/templ-test/components"
+	"time"
+)
+
+templ Home() {
+	<!DOCTYPE html>
+	<html lang="en" class="dark print:light scroll-smooth">
+		@Head()
+		<body class="relative">
+			<main class="mx-auto flex flex-col justify-center max-w-2xl gap-y-6 py-24 print:py-0 px-6">
+				<div class="space-y-8 print:space-y-6">
+					<section class="space-y-4 print:space-y-2">
+						<heading class="space-y-2 print:space-y-1">
+							@components.Heading(components.HeadingProps{}) {
+								Hector Sosa
+							}
+							@components.Paragraph(components.ParagraphProps{Class: "font-medium leading-normal text-lg print:text-base text-muted-foreground"}) {
+								Full Stack Engineer | Currently at @webscopeio
+							}
+						</heading>
+						<ul class="flex flex-wrap gap-1.5">
+							<li>
+								@components.Badge(components.BadgeProps{Variant: "outline", Href: "https://hectorsosa.me", Title: "Visit Hector Sosa's website"}) {
+									@components.WebIcon()
+									hectorsosa.me
+								}
+							</li>
+							<li>
+								@components.Badge(components.BadgeProps{Variant: "outline", Href: "mailto:hello@hectorsosa.me", Title: "Send an email to hello@hectorsosa.me"}) {
+									@components.MailIcon()
+									hello@hectorsosa.me
+								}
+							</li>
+							<li>
+								@components.Badge(components.BadgeProps{Variant: "outline", Href: "https://github.com/iamhectorsosa", Title: "Visit Hector Sosa's GitHub"}) {
+									@components.GitHubIcon()
+									{ fmt.Sprintf("@iamhectorsosa") }
+								}
+							</li>
+							<li>
+								@components.Badge(components.BadgeProps{Variant: "outline", Href: "https://linkedin.com/in/iamhectorsosa", Title: "Visit Hector Sosa's LinkedIn"}) {
+									@components.LinkedInIcon()
+									{ fmt.Sprintf("@iamhectorsosa") }
+								}
+							</li>
+							<li>
+								@components.Badge(components.BadgeProps{Variant: "outline", Href: "https://x.com/iamhectorsosa", Title: "Visit Hector Sosa's X"}) {
+									@components.XIcon()
+									{ fmt.Sprintf("@iamhectorsosa") }
+								}
+							</li>
+						</ul>
+					</section>
+					<section class="space-y-4 print:space-y-2">
+						@components.Heading(components.HeadingProps{Level: "h2"}) {
+							About
+						}
+						@components.Paragraph(components.ParagraphProps{}) {
+							Full Stack Engineer (Msc. Project Management) with +5 years of experience in developing responsive and scalable enterprise applications using React, TypeScript, GraphQL, Go and more.
+						}
+						@components.Paragraph(components.ParagraphProps{}) {
+							My expertise includes defining technical specifications, building performant UI, and collaborating effectively across teams to deliver high-quality software solutions.
+						}
+					</section>
+					@components.Section("Work Experience", []components.SectionItem{
+						{
+							Title:       "Senior React/TypeScript Developer at Webscope.io",
+							Date:        "2022 — Now · " + fmt.Sprintf("%d yrs\n", time.Now().Year()-2022),
+							Href:        "https://webscope.io/",
+							Description: "Migrating and implementing a complex data observability platform, utilizing React, TypeScript, GraphQL and Go. Enhancing diagnostic capabilities, optimizing performance and reducing user support requests.",
+						},
+						{
+							Title:       "SN Technical Consultant at GuideVision Česko",
+							Date:        "2021 — 2022 · 1 yr",
+							Href:        "http://guidevision.eu/",
+							Description: "Developed an IT helpdesk application using Angular for improved request management. Defined specifications, completed multiple projects, and increased code coverage up to 80%.",
+						},
+						{
+							Title:       "Frontend Developer (Freelance)",
+							Date:        "2019 — 2021 · 2 yrs",
+							Description: "Developed responsive, customized websites for diverse clients using React, Vite, and Next, with styling frameworks including Bootstrap, Bulma, and Material UI.",
+						},
+					})
+					@components.Section("Education", []components.SectionItem{
+						{
+							Title: "M.Sc., Project Management at Universidad Tecnológica Centroamericana",
+							Date:  "2017 — 2019",
+							Href:  "https://www.unitec.edu/",
+						},
+					})
+					@components.Section("Certifications", []components.SectionItem{
+						{
+							Title: "Full Stack Open 2021 at University of Helsinki",
+							Date:  "2021",
+							Href:  "https://fullstackopen.com/en/",
+						},
+						{
+							Title: "Web Developer Bootcamp 2020 at Udemy",
+							Date:  "2020",
+							Href:  "https://www.udemy.com/course/the-web-developer-bootcamp/",
+						},
+					})
+					@components.Section("Speaking", []components.SectionItem{
+						{
+							Title: "Understanding Suspense with Next 13 at Webscope.io",
+							Date:  "2023",
+							Href:  "https://github.com/iamhectorsosa/suspense-demo",
+						},
+						{
+							Title: "REST API Fundamentals Workshop at Guidevision Česko",
+							Date:  "2022",
+							Href:  "https://www.figma.com/file/4kk6YfgSq6ak691XSEhXe6/REST-API",
+						},
+					})
+				</div>
+				@components.Print()
+			</main>
+		</body>
+	</html>
+}

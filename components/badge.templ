@@ -1,0 +1,40 @@
+package components
+
+type BadgeProps struct {
+	Variant string
+	Class   string
+	Href    string
+	Title   string
+}
+
+var badgeVariants = CVA(StyleConfig{
+	Base: []string{
+		"inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+	},
+	Variants: map[string]map[string]string{
+		"variant": {
+			"default":     "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
+			"secondary":   "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+			"destructive": "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
+			"outline":     "text-foreground",
+		},
+	},
+	DefaultVariants: map[string]string{
+		"variant": "default",
+	},
+})
+
+func (p *BadgeProps) cn() string {
+	return badgeVariants(StyleProps{
+		Variants: map[string]string{
+			"variant": p.Variant,
+		},
+		Class: p.Class,
+	})
+}
+
+templ Badge(props BadgeProps) {
+	<a target="_blank" rel="noopener noreferrer" title={ props.Title } href={ templ.URL(props.Href) } class={ props.cn() }>
+		{ children... }
+	</a>
+}
