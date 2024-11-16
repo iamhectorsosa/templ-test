@@ -40,10 +40,10 @@ jobs:
       - name: Install Templ CLI
         run: go install github.com/a-h/templ/cmd/templ@latest
 
-      - name: Set up Node.js (LTS)
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "lts"
+          node-version: "20.15.1"
 
       - name: Install pnpm
         run: npm install -g pnpm
