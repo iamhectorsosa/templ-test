@@ -21,7 +21,7 @@ dev/server:
 	--build.cmd "go build -o tmp/main" \
 	--build.bin "./tmp/main" \
 	--build.delay "0" \
-	--build.include_ext "go,templ,css" \
+	--build.include_ext "go,templ,css,yml" \
 	--build.exclude_dir ".dist" \
  	--build.stop_on_error "false" \
  	--proxy.app_port 3000 \

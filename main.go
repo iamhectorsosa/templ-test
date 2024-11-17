@@ -38,7 +38,13 @@ func build() {
 		log.Fatalf("failed to create output file, err=%v", err)
 	}
 
-	if err = templates.Home().Render(context.Background(), file); err != nil {
+	config, err := templates.ParseYaml("data.yml")
+	if err != nil {
+		log.Fatalf("error reading YAML, err=%v", err)
+		return
+	}
+
+	if err = templates.Home(config).Render(context.Background(), file); err != nil {
 		log.Fatalf("failed to write index page, err=%v", err)
 	}
 }
