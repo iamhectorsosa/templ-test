@@ -8,7 +8,7 @@ import (
 
 templ Home() {
 	<!DOCTYPE html>
-	<html lang="en" class="dark print:light scroll-smooth">
+	<html lang="en" class="dark scroll-smooth">
 		@Head()
 		<body class="relative">
 			<main class="mx-auto flex flex-col justify-center max-w-2xl gap-y-6 py-24 print:py-0 px-6">
@@ -44,12 +44,6 @@ templ Home() {
 							<li>
 								@components.Badge(components.BadgeProps{Variant: "outline", Href: "https://linkedin.com/in/iamhectorsosa", Title: "Visit Hector Sosa's LinkedIn"}) {
 									@components.LinkedInIcon()
-									{ fmt.Sprintf("@iamhectorsosa") }
-								}
-							</li>
-							<li>
-								@components.Badge(components.BadgeProps{Variant: "outline", Href: "https://x.com/iamhectorsosa", Title: "Visit Hector Sosa's X"}) {
-									@components.XIcon()
 									{ fmt.Sprintf("@iamhectorsosa") }
 								}
 							</li>

@@ -75,9 +75,13 @@
         @apply border-border;
     }
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background text-foreground print:bg-white print:text-black;
         font-feature-settings:
             "rlig" 1,
             "calt" 1;
+    }
+
+    body .text-muted-foreground {
+        @apply print:text-black;
     }
 }
